@@ -20,7 +20,7 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-    origin: 'https://cerulean-lollipop-5aa6f1.netlify.app', // Replace with your frontend URL
+    origin: 'https://frontend-new-five.vercel.app/', // Replace with your frontend URL
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
     preflightContinue: false,
