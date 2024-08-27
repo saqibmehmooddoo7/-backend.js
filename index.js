@@ -31,6 +31,8 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
+app.options('*', cors(corsOptions));
+
 // Tracking Data Schema
 const trackingSchema = new mongoose.Schema({
     uniqueId: { type: String },
