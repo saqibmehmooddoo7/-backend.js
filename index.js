@@ -20,10 +20,10 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-    origin: 'https://frontend-new-five.vercel.app/track', // Replace with your frontend URL
+    origin: 'https://frontend-new-five.vercel.app', // Replace with your frontend URL
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
-    credentials: false,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
 };
 
 app.use(cors(corsOptions));
