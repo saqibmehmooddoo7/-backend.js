@@ -1,4 +1,4 @@
-require('dotenv').config();  
+require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -19,23 +19,27 @@ mongoose.connect(process.env.MONGODB_URI, {
 const app = express();
 
 // CORS configuration
-app.use(cors({
-    origin: '*', // Aap specific origin define kar sakte hain, e.g., 'https://your-frontend.netlify.app'
+const corsOptions = {
+    origin: 'https://cerulean-lollipop-5aa6f1.netlify.app', // Replace with your frontend URL
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type']
-}));
+    allowedHeaders: ['Content-Type'],
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
 // Tracking Data Schema
 const trackingSchema = new mongoose.Schema({
-    uniqueId: { type: String }, // Store the unique ID
-    url: { type: String }, // Store the URL
-    userAgent: { type: String }, // Store the user agent
-    country: { type: String }, 
-    city:{type:String},// Store the user's location
-    eventType: { type: String }, // Store the type of event (e.g., "page_view", "contact_button_click")
-    timestamp: { type: Date, default: Date.now } // Automatically store the timestamp
+    uniqueId: { type: String },
+    url: { type: String },
+    userAgent: { type: String },
+    country: { type: String },
+    city: { type: String },
+    eventType: { type: String },
+    timestamp: { type: Date, default: Date.now }
 });
 
 const Tracking = mongoose.model('Tracking', trackingSchema);
