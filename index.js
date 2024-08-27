@@ -23,7 +23,7 @@ const corsOptions = {
     origin: 'https://frontend-new-five.vercel.app/', // Replace with your frontend URL
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
-    credentials: true,
+    credentials: false,
 };
 
 app.use(cors(corsOptions));
