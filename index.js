@@ -46,7 +46,7 @@ const trackingSchema = new mongoose.Schema({
 const Tracking = mongoose.model('Tracking', trackingSchema);
 
 // API Endpoint to Receive Tracking Data
-app.post('/track', async (req, res) => {
+app.post('/', async (req, res) => {
     try {
         const trackingData = new Tracking(req.body);
         await trackingData.save();
