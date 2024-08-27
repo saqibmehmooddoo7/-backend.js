@@ -20,7 +20,7 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-    origin: 'https://frontend-new-five.vercel.app/', // Replace with your frontend URL
+    origin: 'https://frontend-new-five.vercel.app/track', // Replace with your frontend URL
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
     credentials: false,
@@ -46,7 +46,7 @@ const trackingSchema = new mongoose.Schema({
 const Tracking = mongoose.model('Tracking', trackingSchema);
 
 // API Endpoint to Receive Tracking Data
-app.post('/', async (req, res) => {
+app.post('/track', async (req, res) => {
     try {
         const trackingData = new Tracking(req.body);
         await trackingData.save();
