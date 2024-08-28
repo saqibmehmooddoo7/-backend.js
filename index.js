@@ -72,8 +72,5 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-// Start the server
-
-app.listen();
-
+// Export the app for Vercel serverless functions
 module.exports = app;
