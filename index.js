@@ -18,13 +18,13 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: 'https://frontend-new-five.vercel.app',
+  origin: 'https://frontend-new-five.vercel.app', // Change to your frontend URL
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 };
 
-app.use(cors(corsOptions)); // Apply CORS middleware here
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
