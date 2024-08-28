@@ -24,10 +24,9 @@ const corsOptions = {
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); // Apply CORS middleware here
 
 app.use(bodyParser.json());
-app.options('*', cors(corsOptions));
 
 // Middleware to log requests
 app.use((req, res, next) => {
