@@ -25,6 +25,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 app.options('*', cors(corsOptions));
 
