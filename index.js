@@ -18,7 +18,7 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: 'https://frontend-new-five.vercel.app', // Change to your frontend URL
+  origin: 'https://hatzs.com/', // Change to your frontend URL
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
