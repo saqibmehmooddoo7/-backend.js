@@ -6,19 +6,22 @@ const cors = require('cors');
 
 // MongoDB Connection
 console.log('MongoDB URI:', process.env.MONGODB_URI);
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log("MongoDB connected successfully.");
-  })
-  .catch((err) => {
-    console.error("MongoDB connection failed:", err.message);
-  });
+mongoose.connect(process.env.MONGODB_URI, { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true 
+})
+.then(() => {
+  console.log("MongoDB connected successfully.");
+})
+.catch((err) => {
+  console.error("MongoDB connection failed:", err.message);
+});
 
 const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: 'https://hatzs.com/', // Change to your frontend URL
+  origin: 'https://hatzs.com/',
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -36,14 +39,16 @@ app.use((req, res, next) => {
 
 // Tracking Data Schema
 const trackingSchema = new mongoose.Schema({
-  uniqueId: { type: String },
+  uniqueId: { type: String, required: true },
   url: { type: String },
   userAgent: { type: String },
   country: { type: String },
   city: { type: String },
   eventType: { type: String },
-  formData: { type: Object },
-  timestamp: { type: Date, default: Date.now }
+  formData: { type: Object, default: {} },
+  timestamp: { type: Date, default: Date.now },
+  menuButtonClick: { type: Boolean, default: false },
+  closeButtonClick: { type: Boolean, default: false }
 });
 
 const Tracking = mongoose.model('Tracking', trackingSchema);
