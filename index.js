@@ -15,11 +15,9 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   });
 
 const app = express();
-
-// CORS configuration
 const corsOptions = {
-  origin: 'https://hatzs.com/', // Change to your frontend URL
-  methods: ['GET', 'POST', 'OPTIONS'],
+  origin: 'https://hatzs.com/',
+  methods: ['POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 };
@@ -28,49 +26,39 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
-// Middleware to log requests
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
   next();
 });
 
-// Tracking Data Schema
 const trackingSchema = new mongoose.Schema({
-  uniqueId: { type: String },
-  url: { type: String },
-  userAgent: { type: String },
-  country: { type: String },
-  city: { type: String },
-  eventType: { type: String },
-  formData: { type: Object },
-  timestamp: { type: Date, default: Date.now }
+  uniqueId: { type: String, required: true },
+  url: { type: String, required: true },
+  userAgent: { type: String, required: true },
+  country: { type: String, required: true },
+  city: { type: String, required: true },
+  eventType: { type: String, required: true },
+  formData: { type: Object, default: {} },  
+  timestamp: { type: Date, default: Date.now },
+  menuButtonClick: { type: Boolean, default: false },
+  closeButtonClick: { type: Boolean, default: false } 
 });
 
 const Tracking = mongoose.model('Tracking', trackingSchema);
 
-// API Endpoint to Receive Tracking Data
 app.post('/track', async (req, res) => {
   try {
-    console.log('Received tracking data:', req.body);
     const trackingData = new Tracking(req.body);
     await trackingData.save();
     res.status(201).json({ message: 'Tracking data saved successfully.' });
   } catch (error) {
-    console.error('Error saving tracking data:', error);
     res.status(500).json({ message: 'Error saving tracking data.', error: error.message });
   }
 });
 
-// Test route for CORS
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'CORS is working' });
-});
 
-// Error handling middleware
+
 app.use((err, req, res, next) => {
-  console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong!' });
 });
-
-// Export the app for Vercel serverless functions
 module.exports = app;
