@@ -33,11 +33,11 @@ app.use((req, res, next) => {
 
 const trackingSchema = new mongoose.Schema({
   uniqueId: { type: String, required: true },
-  url: { type: String, required: true },
-  userAgent: { type: String, required: true },
-  country: { type: String, required: true },
-  city: { type: String, required: true },
-  eventType: { type: String, required: true },
+  url: { type: String},
+  userAgent: { type: String},
+  country: { type: String},
+  city: { type: String },
+  eventType: { type: String},
   formData: { type: Object, default: {} },  
   timestamp: { type: Date, default: Date.now },
   menuButtonClick: { type: Boolean, default: false },
